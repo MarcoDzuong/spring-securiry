@@ -4,6 +4,8 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -24,6 +26,16 @@ public class RestfulAccessDeniedHandler implements AccessDeniedHandler {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
 //        response.getWriter().println(JSONUtil.parse(CommonResult.forbidden(e.getMessage())));
-        response.getWriter().flush();
+//        response.getWriter().flush();
+        response401(request,response);
+    }
+
+    private void response401(ServletRequest req, ServletResponse resp) {
+        try {
+            HttpServletResponse httpServletResponse = (HttpServletResponse) resp;
+            httpServletResponse.setStatus(401);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
