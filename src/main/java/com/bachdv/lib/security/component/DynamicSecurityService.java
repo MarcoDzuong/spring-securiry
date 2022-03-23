@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * Dynamic permission related business classes
+ *
  * @author BachDV
  * Date : 23/03/2022
  */
